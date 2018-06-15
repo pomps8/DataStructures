@@ -50,7 +50,7 @@ public class PostFixEvaluator
 				{
 					throw new PostFixException("Not Enough operands - stack underflow");
 				}
-				
+				//get operator
 				operator1 = stack.top();
 				stack.pop();
 				
