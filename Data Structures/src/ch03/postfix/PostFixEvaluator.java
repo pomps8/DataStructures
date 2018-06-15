@@ -3,7 +3,6 @@ package ch03.postfix;
 import ch03.stacks.*;
 import java.util.*;
 
-import javax.naming.spi.DirStateFactory.Result;
 
 public class PostFixEvaluator
 {
