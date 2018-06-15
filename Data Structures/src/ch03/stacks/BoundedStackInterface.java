@@ -1,0 +1,12 @@
+package ch03.stacks;
+
+public interface BoundedStackInterface<T> extends StackInterface<T> 
+{
+	
+	void push(T element) throws StackOverflowException;
+	// Throws StackOverflowException if this stack is full,
+	// otherwise places element at the top of this stack.
+	
+	boolean isFull();
+	// returns true if this stack is full, other wise returns false.
+}
