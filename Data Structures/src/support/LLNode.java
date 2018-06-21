@@ -1,5 +1,6 @@
 package support;
 
+//By Anthoy Pompili
 // Implements <T> nodes for a linked list.
 // link -> the reference to the next element
 // info -> the data in the object itself
