@@ -55,5 +55,24 @@ public class LinkedStack<T> implements UnboundedStackInterface<T>
 		top = newNode;
 		
 	}
+	
+	// Prints all the elements in reverse order (acting as a linked list)
+	private void revPrint(LLNode <T> listRef)
+	{
+		System.out.println("1");
+		if(listRef != null)
+		{
+			System.out.println("2");
+			revPrint(listRef.getLink());
+			System.out.println(" " + listRef.getInfo());
+		}
+		System.out.println("1");
+	}
+	
+	// public method to be called to print list in reverse order
+	public void printReversed()
+	{
+		revPrint(top);
+	}
 
 }
