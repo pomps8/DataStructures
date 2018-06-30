@@ -7,5 +7,11 @@ public class Test
 	{
 		Balanced balanced = new Balanced("({[", ")}]");
 		System.out.println(balanced.test("((()))"));
+		
+		LinkedStack <String> stack = new LinkedStack<String>();
+		stack.push("A");
+		stack.push("B");
+		stack.push("C");
+		stack.printReversed();
 	}
 }
