@@ -90,7 +90,7 @@ public class ArrayStringLog implements StringLogInterface{
 		logString.append( "Log: " + name + "\n\n");
 		
 		for(int i = 0; i <= lastIndex; i++)
-			logString.append(logString.toString() + (i+1) + ". " + log[i] + "\n");
+			logString.append((i+1) + ". " + log[i] + "\n");
 			
 		return logString.toString();
 	}
