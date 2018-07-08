@@ -10,5 +10,5 @@ public interface QueueInterface<T>
 	T dequeue() throws QueueUnderflowException;
 	
 	// Returns true if this queue is empty; otherwise, return false.
-	T enqueue() throws  QueueOverflowException;
+	boolean isEmpty();
 }
