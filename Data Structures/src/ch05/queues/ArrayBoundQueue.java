@@ -30,8 +30,8 @@ public class ArrayBoundQueue <T> implements BoundedQueueInterface<T>
 	@Override
 	public T dequeue() throws QueueUnderflowException 
 	{
-		if(isFull())
-			throw new QueueUnderflowException("Enqueue attempted on a full queue.");
+		if(isEmpty())
+			throw new QueueUnderflowException("Dequeue attempted on a full queue.");
 		else
 		{
 			T element = queue[front];
