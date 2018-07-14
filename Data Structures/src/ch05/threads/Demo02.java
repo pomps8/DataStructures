@@ -12,6 +12,6 @@ public class Demo02
 		
 		t.start(); // creates a new thread from this main thread to run another line on execution
 		
-		System.out.println("Count is:\t" + c);
+		System.out.println(c);
 	}
 }
