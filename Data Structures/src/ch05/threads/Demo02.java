@@ -1,3 +1,5 @@
+// Used to test counter class with threads. 
+// Issue arises since "Count is: .." doesnt print out correct value (10000 in this case).
 package ch05.threads;
 
 public class Demo02
