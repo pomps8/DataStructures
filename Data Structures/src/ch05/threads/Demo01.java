@@ -1,3 +1,4 @@
+// Used to test Counter class
 package ch05.threads;
 
 public class Demo01
