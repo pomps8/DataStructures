@@ -38,7 +38,7 @@ public interface IndexedListInterface<T> extends ListInterface<T>
 	/*
 	 * If this list contains an element e such that e.equals(element),
 	 * then returns the index of the first such element.
-	 * Otherwise, returns -1.
+	 * Otherwise, returns -1 (ELEMENT_NOT_FOUND).
 	 */
 	int indexOf(T element);
 	
