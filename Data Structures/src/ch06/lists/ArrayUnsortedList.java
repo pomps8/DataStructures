@@ -23,8 +23,8 @@ public class ArrayUnsortedList<T> implements ListInterface<T>
 	private int currentPos;						// current position for iteration
 	
 	// set by find method
-	private boolean found;						// true if element found, otherwise false
-	private int location;						// indicates location of element if found
+	protected boolean found;						// true if element found, otherwise false
+	protected int location;						// indicates location of element if found
 	
 	public ArrayUnsortedList()
 	{
