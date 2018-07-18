@@ -19,7 +19,7 @@ public class ArrayUnsortedList<T> implements ListInterface<T>
 	private final int DEFAULT_CAPACITY = 100; 
 	private int origCap; 						// original capacity
 	protected T[] list;							// array to hold this list's elements
-	private int numElements;					// number of elements in this list
+	protected int numElements;					// number of elements in this list
 	private int currentPos;						// current position for iteration
 	
 	// set by find method
@@ -57,7 +57,7 @@ public class ArrayUnsortedList<T> implements ListInterface<T>
 	 * found to true and location to the array index of e. If
 	 * not successful, sets found to false.
 	 */
-	private void find(T target)
+	protected void find(T target)
 	{
 		location = 0;
 		found = false;
