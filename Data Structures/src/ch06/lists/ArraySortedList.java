@@ -79,4 +79,43 @@ public class ArraySortedList<T> extends ArrayUnsortedList<T> implements ListInte
 		}
 		return found;
 	}
+	
+	/*
+	 * Searches list for an occurrence of an element e such that
+	 * target.equals(e). If successful, sets instance variables 
+	 * found to true and location to the array index of e. If
+	 * not successful, sets found to false.
+	 */
+	@Override
+	protected void find(T target)
+	{
+		int first = 0;
+		int last = numElements - 1;
+		int compareResult;
+		Comparable targetElement = (Comparable) target;
+		
+		found = false;
+		
+		while(first <= last)
+		{
+			location = (first + last) / 2;
+			compareResult = targetElement.compareTo(list[location]);
+			
+			if(compareResult == 0)
+			{
+				found = true;
+				return;
+			}
+			// target element is less than element at location
+			else if (compareResult < 0)
+			{
+				last = location - 1;
+			}
+			// target element is greater than element at location
+			else
+			{
+				first = location + 1;
+			}
+		}
+	}
 }
