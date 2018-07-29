@@ -118,4 +118,44 @@ public class ArraySortedList<T> extends ArrayUnsortedList<T> implements ListInte
 			}
 		}
 	}
+	
+	// Searches list between fromLocation and toLocation
+	// for an occurrence of an element e such that
+	// target.equals(e). If successful, sets instance variables
+	// found to true and location to the array index of e. If 
+	// not successful, sets found to false.
+	protected void recFind(Comparable target, int beginning, int end)
+	{
+		if (beginning > end)
+			found = false;
+		else
+		{
+			int compareResult;
+			location = (beginning + end) / 2;
+			compareResult = target.compareTo(list[location]);
+			
+			if(compareResult == 0)
+				found = true;
+			else if (compareResult < 0)
+				// target is less than element at location
+				recFind(target, beginning, location - 1);
+			else
+				// target is greater than element at location
+				recFind(target, location + 1, end);
+		}
+	}
+	
+	
+	/*
+	 * Searches list for an occurrence of an element e such that
+	 * target.equals(e). If successful, sets instance variables
+	 * found to true and location to the array index of e. If
+	 * not successful, sets found to false.
+	 */
+	protected void findRecursive(T target)
+	{
+		Comparable targetElement = (Comparable) target;
+		found = false;
+		recFind(targetElement, 0, numElements - 1);
+	}
 }
