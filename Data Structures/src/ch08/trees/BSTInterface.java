@@ -55,6 +55,6 @@ public interface BSTInterface<T extends Comparable<T>>
 	 * Returns the element at the current position on this BST for orderType
 	 * and advances the value of the current position based on the orderType.
 	 */
-	 
+	 T getNext (int orderType);
 	
 }
