@@ -13,7 +13,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements BSTInterface<T
 	// for traversals
 	protected LinkedUnboundQueue<T> inOrderQueue;	// queue of info
 	protected LinkedUnboundQueue<T> preOrderQueue;	// queue of info
-	protected LinkedUnboundQueue<T> PostOrderQueue;	// queue of info
+	protected LinkedUnboundQueue<T> postOrderQueue;	// queue of info
 	
 	// Creates an empty BST object
 	public BinarySearchTree()
@@ -66,12 +66,67 @@ public class BinarySearchTree<T extends Comparable<T>> implements BSTInterface<T
 			return true;		// element is found
 	}
 	
+	// Removes an element e from this BST such that e.compareTo(element) == 0
+	// and returns true if no such element exists, returns false.
 	@Override
 	public boolean remove(T element)
 	{
-		return false;
+		root = recRemove(element, root);
+		return found;
 	}
-
+	
+	// Removes an element e from tree such that e.compareTo(element) == 0
+	// and returns true; if no such element exists, return false.
+	private BSTNode<T> recRemove(T element, BSTNode<T> tree)
+	{
+		if(tree == null)
+			found = false;
+		else if (element.compareTo(tree.getInfo()) < 0)
+			tree.setLeft(recRemove(element, tree.getLeft()));
+		else if (element.compareTo(tree.getInfo()) > 0)
+			tree.setRight(recRemove(element, tree.getRight()));
+		else
+		{
+			tree = removeNode(tree);
+			found = true;
+		}
+		return tree;
+		
+	}
+	
+	/*
+	 * Removes the information at the node referenced by tree.
+	 * The user's data in the node referenced by tree is no 
+	 * longer in the tree. If tree is a leaf node or has only
+	 * a non-null child pointer, the node pointed to by tree is
+	 * removed; otherwise, the user's data is replaced by its
+	 * logical predecessor and the predecessor's node is removed
+	 */
+	private BSTNode<T> removeNode(BSTNode<T> tree)
+	{
+		T data;
+		
+		if(tree.getLeft() == null)
+			return tree.getRight();
+		else if (tree.getRight() == null)
+			return tree.getLeft();
+		else
+		{
+			data = getPredecessor(tree.getLeft());
+			tree.setInfo(data);
+			tree.setLeft(recRemove(data, tree.getLeft()));
+			return tree;
+		}
+				
+	}
+	
+	// Returns the information held in the rightmost node in the tree
+	private T getPredecessor(BSTNode<T> tree)
+	{
+		while(tree.getRight() != null)
+			tree = tree.getRight();
+		return tree.getInfo();
+	}
 	// Returns element if tree contains an element e such that
 	// e.compareTo(element) == 0; otherwise, returns null.
 	// Uses private T recGet(T element, BSTNode<T> tree)... method.
@@ -115,10 +170,115 @@ public class BinarySearchTree<T extends Comparable<T>> implements BSTInterface<T
 		return tree;
 	}
 	
+	
+	// Initializes current position for an iteration through this BST
+	// in orderType order. Returns current number of nodes in the BST.
 	@Override
 	public int reset(int orderType)
 	{
+		int numNodes = size();
+		if(orderType == INORDER)
+		{
+			inOrderQueue = new LinkedUnboundQueue<T>();
+			inOrder(root);
+		}
+		else if (orderType == PREORDER)
+		{
+			preOrderQueue = new LinkedUnboundQueue<T>();
+			preOrder(root);
+		}
+		else if (orderType == POSTORDER)
+		{
+			postOrderQueue = new LinkedUnboundQueue<T>();
+			postOrder(root);
+		}
 		return 0;
 	}
+	
+	/*
+	 * Preconditions: The BST is not empty
+	 * 					The BST has been reset for orderType
+	 * 					The BST has not been modified since the most recent rest
+	 * 					The end of orderTYpe iteration has not been reached
+	 * 
+	 * Returns the element at the current position on this BST for orderType
+	 * and advances the value of the current position based on the orderType.
+	 */
+	@Override
+	public T getNext(int orderType)
+	{
+		if (orderType == INORDER)
+		{
+			try
+			{
+				return inOrderQueue.dequeue();
+			} 
+			catch (QueueUnderflowException e)
+			{
+				e.printStackTrace();
+				return null;
+			}
+		}
+		else if (orderType == PREORDER)
+		{
+			try
+			{
+				return preOrderQueue.dequeue();
+			} 
+			catch (QueueUnderflowException e)
+			{
+				e.printStackTrace();
+				return null;
+			}
+		}
+		else if (orderType == POSTORDER)
+		{
+			try
+			{
+				return postOrderQueue.dequeue();
+			} 
+			catch (QueueUnderflowException e)
+			{
+				e.printStackTrace();
+				return null;
+			}
+		}
+		else
+			return null;
+		
+	}
 
+	
+	// Initializes inOrder with tree elements inOrder order
+	private void inOrder(BSTNode<T> tree)
+	{
+		if (tree != null)
+		{
+			inOrder(tree.getLeft());
+			inOrderQueue.enqueue(tree.getInfo());
+			inOrder(tree.getRight());
+		}
+	}
+	
+	// Initializes preOrder with tree elements preOrder order
+	private void preOrder(BSTNode<T> tree)
+	{
+		if (tree != null)
+		{
+			preOrderQueue.enqueue(tree.getInfo());
+			preOrder(tree.getLeft());
+			preOrder(tree.getRight());
+		}
+	}
+	
+	// Initializes postOrder with tree elements postOrder order
+	private void postOrder(BSTNode<T> tree)
+	{
+		if (tree != null)
+		{
+			postOrder(tree.getLeft());
+			postOrder(tree.getRight());
+			postOrderQueue.enqueue(tree.getInfo());
+		}
+	}
 }
