@@ -11,6 +11,8 @@ package ch09.priorityQueues;
 
 import java.util.*;
 
+import ch02.stringLogs.LLStringNode;
+
 public class Heap <T extends Comparable<T>> implements PriQueueInterface<T>
 {
 	private ArrayList<T> elements;  // Priority queue elements
@@ -146,6 +148,18 @@ public class Heap <T extends Comparable<T>> implements PriQueueInterface<T>
 			hole = newhole;								// move hole down
 			newhole = newHole(hole, element);			// fill in the final hole
 		}
+	}
+	
+	// Returns a string of all the heap elements
+	@Override
+	public String toString()
+	{
+		StringBuilder theHeap = new StringBuilder("the heap is: \n");
+		
+		for(int index = 0; index <= lastIndex; index++)
+			theHeap.append(index + ". " + elements.get(index) + "\n");
+		
+		return theHeap.toString();
 	}
 	
 }
