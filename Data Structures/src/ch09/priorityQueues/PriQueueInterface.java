@@ -20,7 +20,7 @@ public interface PriQueueInterface<T extends Comparable<T>>
 	void enqueue(T element);
 	
 	// Throws PriQUnderflowException if this priority queue is empty;
-	// otherwise, removes element with highest prioty from this
-	// priority queue and reutrns it.
+	// otherwise, removes element with highest priority from this
+	// priority queue and returns it.
 	T dequeue();
 }
