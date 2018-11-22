@@ -111,7 +111,7 @@ public class Heap <T extends Comparable<T>> implements PriQueueInterface<T>
 				// element < left child
 				return left;
 			else
-				// element >= left child
+				// element >= left child 
 				return hole;
 		else
 			// hole has two children
