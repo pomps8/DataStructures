@@ -53,4 +53,7 @@ public interface WeightedGraphInterface<T>
 	
 	// Returns true if vertex is marked; otherwise, returns false
 	boolean isMarked(T Vertex);
+	
+	// Returns an unmarked vertex if any exist; otherwise, returns null.
+	T getUnmarked();
 }
