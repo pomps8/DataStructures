@@ -72,9 +72,18 @@ public class WeightedGraph<T> implements WeightedGraphInterface<T>
 		for(int index = 0; index < numVertices; index++)
 		{
 			edges[numVertices][index] = NULL_EDGE;
-			edges[index][index] = NULL_EDGE;
+			edges[index][numVertices] = NULL_EDGE;
 		}
 		numVertices++;
+	}
+	
+	// Returns the index of vertex in vertices.
+	private int indexIs(T vertex)
+	{
+		int index = 0;
+		while(!vertex.equals(vertices[index]))
+			index++;
+		return index;
 	}
 
 	@Override
@@ -83,15 +92,29 @@ public class WeightedGraph<T> implements WeightedGraphInterface<T>
 		return false;
 	}
 
+	// Adds an edge with the specified weight from fromVertex to toVertex
 	@Override
 	public void addEdge(T fromVertex, T toVertex, int weight)
 	{
+		int row;
+		int column;
+		
+		row = indexIs(fromVertex);
+		column = indexIs(toVertex);
+		edges[row][column] = weight;
 	}
 
+	// If edge from fromVertex to toVertex exists, returns the 
+	// weight of edge ; otherwise, returns a special "null-edge" value.
 	@Override
 	public int weightIs(T fromVertex, T toVertex)
 	{
-		return 0;
+		int row;
+		int column;
+		
+		row = indexIs(fromVertex);
+		column = indexIs(toVertex);
+		return edges[row][column];
 	}
 
 	@Override
