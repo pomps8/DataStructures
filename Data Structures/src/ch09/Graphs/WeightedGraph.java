@@ -45,13 +45,14 @@ public class WeightedGraph<T> implements WeightedGraphInterface<T>
 		edges = new int[maxV][maxV];
 	}
 
-	
+	// Returns true if this graph is empty; otherwise, returns false.
 	@Override
 	public boolean isEmpty()
 	{
 		return (numVertices == 0);
 	}
 
+	// Returns true if this graph is full; otherwise, returns false.
 	@Override
 	public boolean isFull()
 	{
@@ -86,6 +87,7 @@ public class WeightedGraph<T> implements WeightedGraphInterface<T>
 		return index;
 	}
 
+	// Returns true if this graph contains vertex; otherwise, returns false.
 	@Override
 	public boolean hasVertex(T vertex)
 	{
@@ -136,6 +138,7 @@ public class WeightedGraph<T> implements WeightedGraphInterface<T>
 		return adjVertices;
 	}
 
+	// Sets marks for all vertices to false.
 	@Override
 	public void clearMarks()
 	{
@@ -145,18 +148,21 @@ public class WeightedGraph<T> implements WeightedGraphInterface<T>
 		}
 	}
 
+	// Sets mark for vertex to true
 	@Override
 	public void markVertex(T vertex)
 	{
 		marks[indexIs(vertex)] = true;
 	}
 
+	// Returns true if vertex is marked; otherwise, returns false
 	@Override
 	public boolean isMarked(T vertex)
 	{
 		return (marks[indexIs(vertex)]);
 	}
 
+	// Returns an unmarked vertex if any exist; otherwise, returns null.
 	@Override
 	public T getUnmarked()
 	{
