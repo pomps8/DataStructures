@@ -49,13 +49,13 @@ public class WeightedGraph<T> implements WeightedGraphInterface<T>
 	@Override
 	public boolean isEmpty()
 	{
-		return false;
+		return (numVertices == 0);
 	}
 
 	@Override
 	public boolean isFull()
 	{
-		return false;
+		return (numVertices == maxVertices);
 	}
 
 	/*
@@ -89,6 +89,12 @@ public class WeightedGraph<T> implements WeightedGraphInterface<T>
 	@Override
 	public boolean hasVertex(T vertex)
 	{
+		for(int index = 0; index < numVertices; index++)
+		{
+			if(vertex.equals(vertices[index]))
+				return true;
+		}
+
 		return false;
 	}
 
@@ -117,31 +123,49 @@ public class WeightedGraph<T> implements WeightedGraphInterface<T>
 		return edges[row][column];
 	}
 
+	// Returns a queue of the vertices that are adjacent from vertex.
 	@Override
 	public UnboundedQueueInterface<T> getToVertices(T vertex)
 	{
-		return null;
+		UnboundedQueueInterface<T> adjVertices = new LinkedUnboundQueue<T>();
+		int fromIndex;
+		int toIndex;
+		fromIndex = indexIs(vertex);
+		for(toIndex = 0; toIndex < numVertices; toIndex++)
+			adjVertices.enqueue(vertices[toIndex]);
+		return adjVertices;
 	}
 
 	@Override
 	public void clearMarks()
 	{
+		for(int index = 0; index < maxVertices; index++)
+		{
+			marks[index] = false;
+		}
 	}
 
 	@Override
 	public void markVertex(T vertex)
 	{
+		marks[indexIs(vertex)] = true;
 	}
 
 	@Override
-	public boolean isMarked(T Vertex)
+	public boolean isMarked(T vertex)
 	{
-		return false;
+		return (marks[indexIs(vertex)]);
 	}
 
 	@Override
 	public T getUnmarked()
 	{
+		for(int index = 0; index < numVertices; index++)
+		{
+			T possibleVertex = vertices[index];
+			if(!marks[indexIs(possibleVertex)])
+				return possibleVertex;
+		}
 		return null;
 	}
 	
